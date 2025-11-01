@@ -35,8 +35,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [checkout the source code](https://github.com/jidoG8/TIP-CALCULATOR-APP.git)
+- Live Site URL: [Behold the live project](https://jidog8.github.io/TIP-CALCULATOR-APP/)
 
 ## My process
 
