@@ -1,0 +1,429 @@
+/*
+    @date: 2025/10/30
+    @code: Frontend Mentor | Tip calculator app
+    @version: 1.0
+    @author: Ojja
+*/
+
+/* imported fonts */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+@layer global, theme, modules;
+
+/* GENERAL ELEMENT STYLES */
+@layer global {
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+		display: grid;
+		place-items: center;
+		min-height: 100vh;
+		font-size: 1em;
+		padding: clamp(0.25rem, 2vw, 1rem);
+	}
+
+	main {
+		display: flex;
+		place-items: center;
+		justify-content: center;
+		flex-direction: column;
+		background-color: var(--grey200);
+		width: 100%;
+		height: 100%;
+		margin: 0;
+	}
+
+	form {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: min-content;
+		overflow: hidden;
+		gap: 40px;
+		width: 95%;
+		max-width: 100%;
+		box-shadow: 0 0 6px rgba(0 0 0 /0.15);
+		place-items: center;
+
+		/* reduce padding for child items */
+		padding: 2rem;
+		border-radius: 1em;
+		font-weight: var(--fw700);
+		color: var(--grey400);
+		font-family: "Space Mono", monospace;
+		background-color: var(--white);
+	}
+
+	form > input {
+		width: 100%;
+		max-width: 100%;
+		font-size: 24px;
+		font-family: "Space Mono", monospace;
+		font-weight: var(--fw700);
+		border: none;
+		outline: none;
+		background-color: var(--grey50);
+	}
+
+	fieldset {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+		gap: 12px;
+		border: none;
+		margin: 0;
+		padding: 1rem;
+		place-items: center;
+	}
+
+	input {
+		height: 30px;
+		width: 100%;
+	}
+
+	fieldset input {
+		height: 50px;
+		width: 80%;
+	}
+}
+
+/* DESIGN TOKENS & CSS CUSTOM PROPERTIES */
+@layer theme {
+	:root {
+		/* Primary Colors */
+		--green400: hsl(172, 67%, 45%);
+		--green900: hsl(183, 100%, 15%);
+
+		/* Neutral Colors */
+		--grey500: hsl(186, 14%, 43%);
+		--grey400: hsl(184, 14%, 56%);
+		--grey200: hsl(185, 41%, 84%);
+		--grey50: hsl(189, 47%, 97%);
+		--white: hsl(0, 100%, 100%);
+		--errColor: #c1785a;
+
+		/* Typography */
+		--fsize: 24px;
+		--fw700: 700;
+	}
+}
+
+/* COMPONENT STYLES & INTERACTIONS */
+@layer modules {
+	/* ===== LAYOUT COMPONENTS ===== */
+
+	.tip .tip__container {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		padding: 0.5em;
+	}
+
+	.tip-amount__section {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		width: 100%;
+		max-width: 100%;
+		background-color: var(--green900);
+		padding: 1.3em;
+		border-radius: 0.5em;
+	}
+
+	/* ===== INPUT COMPONENTS ===== */
+	/* Bill input with dollar icon */
+	.bill__container {
+		position: relative;
+	}
+
+	.bill__container .bill__icon {
+		position: absolute;
+		padding: 10px;
+		min-width: 20px;
+	}
+
+	.bill__container .bill__input {
+		text-align: right;
+		padding-left: 20px;
+		padding-block: 18px;
+		padding-right: 10px;
+		font-family: inherit;
+		font-weight: var(--fw700);
+		font-size: inherit;
+		border: none;
+		background-color: var(--grey50);
+		border-radius: 0.3em;
+	}
+
+	.bill__input:hover {
+		cursor: pointer;
+		border: 2px solid var(--green400);
+	}
+
+	/* Number of people input with person icon */
+	.num-people__box {
+		position: relative;
+	}
+
+	.num-people__box .num-people__icon {
+		position: absolute;
+		left: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+		padding-top: 22px;
+	}
+
+	.num-people__box .num-people__input {
+		text-align: right;
+		padding-left: 20px;
+		padding-block: 18px;
+		padding-right: 10px;
+		font-family: inherit;
+		font-weight: var(--fw700);
+		font-size: inherit;
+		border: none;
+		background-color: var(--grey50);
+		border-radius: 0.3em;
+	}
+
+	.num-people__input:hover {
+		border: 2px solid var(--green400);
+		cursor: pointer;
+	}
+
+	/* ===== TIP SELECTION ===== */
+	/* Percentage button rows */
+	.tip-percentage__row--1,
+	.tip-percentage__row--2 {
+		display: contents;
+	}
+
+	.tip-percentage__row--1 {
+		color: var(--white);
+		font-weight: var(--fw700);
+	}
+
+	/* Tip percentage buttons */
+	.tip-percentage input {
+		background-color: var(--green900);
+		color: var(--white);
+	}
+
+	.submit {
+		font-weight: var(--fw700);
+		color: var(--white);
+		font-family: inherit;
+		background-color: var(--green900);
+		border: none;
+		border-radius: 0.3em;
+		font-size: inherit;
+	}
+
+	.submit:hover {
+		cursor: pointer;
+		background-color: var(--green400);
+	}
+
+	/* Custom tip input */
+	#tip-percentage__custom-input {
+		background-color: var(--grey50);
+		padding: 6px;
+		text-align: center;
+	}
+
+	#tip-percentage__custom-input::placeholder {
+		text-align: center;
+	}
+
+	/* ===== RESULTS DISPLAY ===== */
+	/* Label and value alignment */
+	.alignment {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 0.5em;
+		flex-direction: column;
+	}
+
+	.alignment .tip-amount__label--1 {
+		align-items: center;
+		padding-block: 0;
+		margin-block: 0;
+		font-size: 0.8rem;
+
+		color: var(--white);
+	}
+
+	.alignment .tip-amount__label--2 {
+		margin-top: 0;
+		padding-top: 0;
+		font-size: 0.6rem;
+	}
+
+	/* Tip calculation display */
+	.tip-amount__computation {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.tip-amount__row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	#tip-amount__per-person,
+	#tip-amount__total-per-person {
+		font-size: 2rem;
+		color: var(--green400);
+	}
+
+	/* Reset button */
+	input[type="reset"] {
+		font-size: inherit;
+		font-weight: var(--fw700);
+		font-family: inherit;
+		text-transform: uppercase;
+		margin-block-start: 50px;
+		background-color: var(--green400);
+		border: none;
+		outline: none;
+		border-radius: 0.3em;
+		height: auto;
+		padding-block: 0.6em;
+	}
+
+	input[type="reset"]:hover {
+		cursor: pointer;
+	}
+	input[type="reset"]:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+		background-color: hsl(186, 14%, 43%);
+	}
+
+	/* STYLING THE LOGO AND CODER NAME */
+	.attribution {
+		/* layout */
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+
+		/* visuals */
+		margin: 1em;
+		font-weight: 600;
+		color: var(--gray-500);
+		font-size: 1rem;
+		text-align: center;
+		color: var(--accent-red);
+		gap: 6px;
+		font-family: inherit;
+	}
+
+	.attribution .logo {
+		width: 30px;
+
+		padding: 0;
+		border-radius: 50%;
+		box-shadow: 3px 3px 3px var(--red);
+
+		/* align-logo */
+		vertical-align: middle;
+		height: 30px;
+	}
+
+	a {
+		text-decoration: none;
+		font-weight: var(--fw-700);
+		color: var(--dark-gray);
+	}
+
+	a:hover {
+		color: orange;
+	}
+
+	a:active {
+		color: var(--accent-orange);
+	}
+
+	/* Error message positioning */
+	.bill {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	.bill__container {
+		width: 100%;
+	}
+
+	.num-people__box {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	.num-people__input {
+		width: 100%;
+		padding: 1em;
+	}
+
+	.bill__input-error,
+	.num-people__input-error {
+		color: var(--errColor);
+		font-size: 12px;
+		display: none;
+		overflow: hidden;
+	}
+
+	/* ===== RESPONSIVE DESIGN ===== */
+	/* DESKTOPVIEW */
+	@media (min-width: 768px) {
+		form {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: min-content;
+			overflow: hidden;
+			gap: 12px;
+			width: 55%;
+			max-width: 1440px;
+		}
+
+		fieldset {
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-rows: repeat(2, 1fr);
+			place-items: center;
+		}
+
+		fieldset input {
+			height: 30px;
+			width: 100%;
+		}
+
+		.tip-amount__section {
+			justify-content: space-between;
+			height: 100%;
+		}
+
+		.tip-amount__reset {
+			margin-top: auto;
+			padding: 1em;
+			margin-bottom: 18px;
+			text-align: center;
+		}
+
+		input[type="reset"] {
+			line-height: 1;
+			padding-top: 0.8em;
+			padding-bottom: 0.6em;
+			height: auto;
+		}
+	}
+}

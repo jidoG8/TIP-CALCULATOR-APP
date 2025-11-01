@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Frontend Mentor | Tip calculator app</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<main>
+			<h1>
+				<img src="./images/logo.svg" alt="" />
+			</h1>
+			<form class="tip">
+				<section class="tip__container">
+					<!-- BILL AMOUNT -->
+					<section class="bill">
+						<label for="bill__input" class="bill__label">Bill</label>
+						<span class="bill__input-error"></span>
+						<section class="bill__container">
+							<img
+								src="./images/icon-dollar.svg"
+								alt="icon-dollar"
+								class="bill__icon"
+							/>
+							<input
+								type="number"
+								id="bill__input"
+								class="bill__input"
+								placeholder="0"
+								min="0"
+							/>
+						</section>
+					</section>
+
+					<!-- TIP PERCENTAGES -->
+					<section class="tip-percentage__section">
+						<fieldset>
+							<legend>Select tip %</legend>
+							<section class="tip-percentage__row--1">
+								<input
+									type="submit"
+									value="5%"
+									id="tip-percentage__btn--5"
+									class="submit"
+								/>
+								<input
+									type="submit"
+									value="10%"
+									id="tip-percentage__btn--10"
+									class="submit"
+								/>
+								<input
+									type="submit"
+									value="15%"
+									id="tip-percentage__btn--15"
+									class="submit"
+								/>
+							</section>
+							<section class="tip-percentage__row--2">
+								<input
+									type="submit"
+									value="25%"
+									id="tip-percentage__btn--25"
+									class="submit"
+								/>
+								<input
+									type="submit"
+									value="50%"
+									id="tip-percentage__btn--50"
+									class="submit"
+								/>
+								<input
+									type="number"
+									placeholder="Custom"
+									id="tip-percentage__custom-input"
+									min="1"
+									class="submit custom-input"
+								/>
+							</section>
+						</fieldset>
+					</section>
+
+					<!-- NUMBER OF CLIENTS -->
+					<section class="num-people">
+						<section class="num-people__box">
+							<img
+								src="./images/icon-person.svg"
+								alt=""
+								class="num-people__icon"
+							/>
+							<label for="num-people__input">Number of People</label>
+							<span class="num-people__input-error"></span>
+							<input
+								type="number"
+								id="num-people__input"
+								class="num-people__input"
+								min="1"
+								placeholder="0"
+							/>
+						</section>
+					</section>
+				</section>
+
+				<!-- DISPLAY TIPS PER PERSON AND TOTAL TIPS PER PERSON -->
+				<section class="tip-amount__section">
+					<section class="tip-amount__computation">
+						<section class="alignment">
+							<p class="tip-amount__label--1">Tip Amount</p>
+							<p class="tip-amount__label--2">/ person</p>
+						</section>
+						<section
+							id="tip-amount__per-person"
+							class="tip-amount__per-person"
+						></section>
+					</section>
+
+					<section class="tip-amount__computation">
+						<section class="alignment">
+							<p class="tip-amount__label--1">Total</p>
+							<p class="tip-amount__label--2">/ person</p>
+						</section>
+						<section
+							id="tip-amount__total-per-person"
+							class="tip-amount__total-per-person"
+						></section>
+					</section>
+
+					<input
+						type="reset"
+						class="tip-amount__reset"
+						id="tip-amount__reset"
+					/>
+				</section>
+			</form>
+			<section class="attribution">
+				<p>
+					Challenge by
+					<img
+						src="./images/favicon-32x32.png"
+						alt="frontEnd-Mentor Logo"
+						class="logo"
+					/>
+					<a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+						>Frontend Mentor</a
+					>. Coded by
+					<a href="https://www.frontendmentor.io/profile/jidoG8">Ojja Caesar </a
+					>.
+				</p>
+			</section>
+		</main>
+		<script src="./index.js"></script>
+	</body>
+</html>
